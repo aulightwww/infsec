@@ -1,3 +1,4 @@
+
 def alpcezar(text, shift):
     result = []
 
@@ -15,8 +16,25 @@ def alpcezar(text, shift):
 
     return ''.join(result)  # Возвращаем строку, собрав её из списка
 
+def break_cezar(text):
+    print("\nПопытки взлома:")
+    
+    # Определяем, какой алфавит используется (русский или английский)
+    is_russian = any('А' <= bukva <= 'я' for bukva in text)
+    alphabet_size = 32 if is_russian else 26  # Русский алфавит — 32 буквы, английский — 26
+
+    # Проверяем все сдвиги от -alphabet_size до +alphabet_size
+    for possible_shift in range(-alphabet_size, alphabet_size + 1):
+        decrypted_text = alpcezar(text, possible_shift)
+        print(f"Сдвиг {possible_shift}: {decrypted_text}")
+
 if __name__ == "__main__":
     text = input("Введите текст для шифрования: ")
     shift = int(input("Введите сдвиг (можно использовать отрицательные значения): "))
     encrypted_text = alpcezar(text, shift)
     print(f"Результат шифрования: {encrypted_text}")
+    
+    # Взлом шифра
+    choice = input("\nХотите попытаться взломать шифр? (да/нет): ").strip().lower()
+    if choice == "да":
+        break_cezar(encrypted_text)
