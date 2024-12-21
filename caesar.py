@@ -1,4 +1,3 @@
-
 def alpcezar(text, shift):
     result = []
 
@@ -29,12 +28,18 @@ def break_cezar(text):
         print(f"Сдвиг {possible_shift}: {decrypted_text}")
 
 if __name__ == "__main__":
-    text = input("Введите текст для шифрования: ")
-    shift = int(input("Введите сдвиг (можно использовать отрицательные значения): "))
-    encrypted_text = alpcezar(text, shift)
-    print(f"Результат шифрования: {encrypted_text}")
+    print("Добро пожаловать в программу шифрования и расшифровки Цезаря!")
+    action = input("Выберите действие (зашифровать, расшифровать, взломать): ").strip().lower()
+
+    if action in {"зашифровать", "расшифровать"}:
+        text = input("Введите текст: ").strip()
+        shift = int(input("Введите сдвиг (положительное число для шифрования, отрицательное для расшифровки): "))
+        result = alpcezar(text, shift)
+        print(f"Результат: {result}")
     
-    # Взлом шифра
-    choice = input("\nХотите попытаться взломать шифр? (да/нет): ").strip().lower()
-    if choice == "да":
-        break_cezar(encrypted_text)
+    elif action == "взломать":
+        text = input("Введите зашифрованный текст: ").strip()
+        break_cezar(text)
+    
+    else:
+        print("Неизвестная команда. Попробуйте снова.")
